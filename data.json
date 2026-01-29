@@ -37,5 +37,19 @@
     "five_star_count": 3,
     "price": 99999,
     "account_type": "Phone:NotSet Eml:NotSet PassWord:Changeable"
+  },
+  {
+    "server_cn": "欧洲",
+    "server_en": "Europe",
+    "gender_cn": "女",
+    "level": 23,
+    "primogems": 3,
+    "intertwined_fate": 0,
+    "characters_cn": "可莉+枫原万叶+优菈",
+    "characters_en": "Klee+Kaedehara Kazuha+Eula",
+    "five_star_count": 3,
+    "price": 99999,
+    "account_type": "Phone:NotSet Eml:NotSet PassWord:Changeable"
   }
+
 ]
