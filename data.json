@@ -1,0 +1,41 @@
+[
+  {
+    "server_cn": "美洲",
+    "server_en": "America",
+    "gender_cn": "女",
+    "level": 23,
+    "primogems": 3000,
+    "intertwined_fate": 0,
+    "characters_cn": "神里绫华+钟离+雷电将军+申鹤+哥伦比娅",
+    "characters_en": "Kamisato Ayaka+Zhongli+Raiden Shogun+Shenhe+Columbina",
+    "five_star_count": 5,
+    "price": 99999,
+    "account_type": "Phone:NotSet Eml:NotSet PassWord:Changeable"
+  },
+  {
+    "server_cn": "亚洲",
+    "server_en": "Asia",
+    "gender_cn": "女",
+    "level": 23,
+    "primogems": 0,
+    "intertwined_fate": 0,
+    "characters_cn": "钟离+枫原万叶+八重神子+纳西妲",
+    "characters_en": "Zhongli+Kaedehara Kazuha+Yae Miko+Nahida",
+    "five_star_count": 4,
+    "price": 99999,
+    "account_type": "Phone:NotSet Eml:NotSet PassWord:Changeable"
+  },
+  {
+    "server_cn": "欧洲",
+    "server_en": "Europe",
+    "gender_cn": "女",
+    "level": 23,
+    "primogems": 3,
+    "intertwined_fate": 0,
+    "characters_cn": "可莉+枫原万叶+优菈",
+    "characters_en": "Klee+Kaedehara Kazuha+Eula",
+    "five_star_count": 3,
+    "price": 99999,
+    "account_type": "Phone:NotSet Eml:NotSet PassWord:Changeable"
+  }
+]
