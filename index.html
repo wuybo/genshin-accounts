@@ -8,17 +8,30 @@
     body {
       font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
       background: #f9f9f9;
-      padding: 20px;
+      padding: 0;
       margin: 0;
     }
+
+    /* 页面顶部标题栏 */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #f9f9f9;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
     h1 {
       text-align: center;
       color: #5e35b1;
-      margin-bottom: 15px;
+      margin: 8px 0;
+      font-size: 1.6em;
     }
+
     .search-box {
       text-align: center;
-      margin-bottom: 20px;
+      margin-top: 12px;
     }
     #searchInput {
       width: 90%;
@@ -29,102 +42,441 @@
       border-radius: 8px;
       outline: none;
     }
+
+    /* 过滤和排序控制栏 */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      padding: 0 20px;
+    }
+
+    .server-tags {
+      display: flex;
+      gap: 10px;
+    }
+
+    .server-tag {
+      padding: 8px 16px;
+      background: #f0f0f0;
+      border: 2px solid #ddd;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .server-tag:hover {
+      background: #e0e0e0;
+    }
+
+    .server-tag.active {
+      background: #5e35b1;
+      color: white;
+      border-color: #5e35b1;
+    }
+
+    .sort-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sort-btn {
+      padding: 8px 16px;
+      background: #f0f0f0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .sort-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .sort-btn.active {
+      background: #5e35b1;
+      color: white;
+      border-color: #5e35b1;
+    }
+
+    .sort-btn::after {
+      content: ' ↕';
+      opacity: 0.7;
+    }
+
+    .sort-btn.asc::after {
+      content: ' ↑';
+    }
+
+    .sort-btn.desc::after {
+      content: ' ↓';
+    }
+
+    /* 表格区域 */
+    .table-container {
+      padding: 0 20px 20px;
+      margin-top: 20px;
+    }
+
+    /* 固定表格表头 */
+    .table-wrapper {
+      position: relative;
+      overflow: auto;
+      max-height: calc(100vh - 320px); /* 增加高度以适应增加的控件 */
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+    
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
+      margin: 0;
     }
-    th, td {
-      padding: 12px 10px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
+    
+    /* 固定表头 */
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
+    
     th {
       background-color: #ede7f6;
       color: #5e35b1;
       font-weight: bold;
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 2px solid #d1c4e9;
+      white-space: nowrap;
     }
+    
+    td {
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
     tr:last-child td {
       border-bottom: none;
     }
+    
     tr:hover {
       background-color: #f5f3fa;
     }
+    
     .price {
       font-weight: bold;
       color: #d32f2f;
       font-size: 1.1em;
     }
+    
     .wrap {
       word-break: break-word;
       max-width: 180px;
     }
+    
+    /* 高亮样式 */
+    mark {
+      background-color: #fff176;
+      padding: 1px 3px;
+      border-radius: 3px;
+    }
+    
+    .highlight {
+      background-color: #fff176;
+      animation: highlightPulse 1.5s ease-in-out;
+    }
+    
+    @keyframes highlightPulse {
+      0% { background-color: #fff176; }
+      50% { background-color: #ffeb3b; }
+      100% { background-color: #fff176; }
+    }
+    
     .no-results {
       text-align: center;
       padding: 30px;
       color: #888;
       display: none;
     }
+    
     .loading {
       text-align: center;
       padding: 30px;
       color: #5e35b1;
     }
+
+    /* 分页控件样式 */
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      background: white;
+      border-radius: 8px;
+      margin-top: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .pagination-info {
+      margin-left: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 20px;
+    }
+
+    .page-size-selector {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .page-size-selector select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+    }
+
+    .page-navigation {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .page-btn {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      background: #f0f0f0;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .page-btn.active {
+      background: #5e35b1;
+      color: white;
+      border-color: #5e35b1;
+    }
+
+    .page-input {
+      width: 50px;
+      padding: 6px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .go-btn {
+      padding: 6px 12px;
+      background: #5e35b1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .go-btn:hover {
+      background: #4527a0;
+    }
+
+    /* 移动端适配 */
     @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr { display: block; }
-      thead tr { display: none; }
+      .sticky-header {
+        padding: 15px 10px;
+      }
+      h1 { font-size: 1.4em; }
+      
+      .controls-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 0 10px;
+      }
+      
+      .server-tags {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .table-wrapper {
+        overflow-x: auto;
+        max-height: calc(100vh - 300px);
+      }
+      
+      table {
+        min-width: 800px;
+      }
+      
       td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-        border: none;
-        padding-top: 8px;
-        padding-bottom: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        width: 45%;
-        font-weight: bold;
-        color: #5e35b1;
+      
+      .wrap {
+        max-width: 150px;
+        white-space: normal;
       }
+
+      .pagination-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 10px;
+      }
+
+      .pagination-info {
+        margin-left: 0;
+        order: 3;
+      }
+
+      .pagination-controls {
+        margin-right: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .page-size-selector {
+        order: 1;
+      }
+
+      .page-navigation {
+        order: 2;
+      }
+    }
+    
+    /* 滚动条样式 */
+    .table-wrapper::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #c5c5c5;
+      border-radius: 4px;
+    }
+    
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
     }
   </style>
 </head>
 <body>
 
-<h1>原神账号信息列表</h1>
-
-<div class="search-box">
-  <input type="text" id="searchInput" placeholder="🔍 搜索服务器、角色、价格、性别等..." autocomplete="off" />
+<!-- 页面顶部标题栏 -->
+<div class="sticky-header">
+  <h1>原神账号信息列表</h1>
+  <h1>Genshin Impact Account Information List</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="🔍 搜索服务器、角色、价格、性别等(Search by server, character, price, gender, etc.)..." autocomplete="off" />
+  </div>
+  
+  <!-- 过滤和排序控制栏 -->
+  <div class="controls-bar">
+    <div class="server-tags">
+      <div class="server-tag" data-server="欧洲">欧服 Europe</div>
+      <div class="server-tag" data-server="美洲">美服 America</div>
+      <div class="server-tag" data-server="亚洲">亚服 Asia</div>
+      <div class="server-tag" data-server="">全部 All</div>
+    </div>
+    
+    <div class="sort-controls">
+      <span>价格排序:</span>
+      <button class="sort-btn" data-sort="default">默认</button>
+      <button class="sort-btn" data-sort="price_asc">价格升序</button>
+      <button class="sort-btn" data-sort="price_desc">价格降序</button>
+    </div>
+  </div>
 </div>
 
-<div id="loading" class="loading">正在加载数据...</div>
-<table id="accountTable" style="display:none;">
-  <thead>
-    <tr>
-      <th>服务器（中）</th>
-      <th>服务器（英）</th>
-      <th>性别</th>
-      <th>等级</th>
-      <th>原石</th>
-      <th>纠缠之缘</th>
-      <th>角色（中文）</th>
-      <th>角色（英文）</th>
-      <th>五星角色数量</th>
-      <th>价格（¥）</th>
-      <th>账号类型</th>
-    </tr>
-  </thead>
-  <tbody id="tableBody"></tbody>
-</table>
+<!-- 表格区域 -->
+<div class="table-container">
+  <div id="loading" class="loading">正在加载数据...</div>
+  
+  <!-- 添加表格包装器，用于固定表头 -->
+  <div class="table-wrapper">
+    <table id="accountTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>服务器（中）</th>
+          <th>Server（En）</th>
+          <th>性别(Gender)</th>
+          <th>等级(Level)</th>
+          <th>原石</th>
+          <th>纠缠之缘</th>
+          <th>角色（中文）</th>
+          <th>Character（EN）</th>
+          <th>五星角色数量(5★No.)</th>
+          <th>价格Price（¥）</th>
+          <th>账号类型</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+  
+  <div id="noResults" class="no-results">未找到匹配的账号</div>
 
-<div id="noResults" class="no-results">未找到匹配的账号</div>
+  <!-- 分页控件 -->
+  <div id="paginationContainer" class="pagination-container" style="display:none;">
+    <div class="pagination-info" id="paginationInfo">
+      显示第 <span id="startRecord">0</span> - <span id="endRecord">0</span> 条，共 <span id="totalRecords">0</span> 条记录
+    </div>
+    
+    <div class="pagination-controls">
+      <div class="page-size-selector">
+        <label>每页显示：</label>
+        <select id="pageSizeSelect">
+          <option value="50">50条</option>
+          <option value="100">100条</option>
+          <option value="150">150条</option>
+          <option value="200">200条</option>
+        </select>
+      </div>
+      
+      <div class="page-navigation">
+        <button id="firstPage" class="page-btn" title="第一页">«</button>
+        <button id="prevPage" class="page-btn" title="上一页">‹</button>
+        
+        <input type="number" id="pageInput" class="page-input" min="1" value="1" />
+        <span> / </span>
+        <span id="totalPages">1</span>
+        
+        <button id="nextPage" class="page-btn" title="下一页">›</button>
+        <button id="lastPage" class="page-btn" title="最后一页">»</button>
+        
+        <button id="goPage" class="go-btn">跳转</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   const searchInput = document.getElementById('searchInput');
@@ -132,68 +484,260 @@
   const table = document.getElementById('accountTable');
   const loading = document.getElementById('loading');
   const noResults = document.getElementById('noResults');
+  const paginationContainer = document.getElementById('paginationContainer');
 
+  // 分页相关元素
+  const pageSizeSelect = document.getElementById('pageSizeSelect');
+  const firstPageBtn = document.getElementById('firstPage');
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
+  const lastPageBtn = document.getElementById('lastPage');
+  const pageInput = document.getElementById('pageInput');
+  const goPageBtn = document.getElementById('goPage');
+  const totalPagesSpan = document.getElementById('totalPages');
+  const totalRecordsSpan = document.getElementById('totalRecords');
+  const startRecordSpan = document.getElementById('startRecord');
+  const endRecordSpan = document.getElementById('endRecord');
+
+  // 服务器标签和排序按钮
+  const serverTags = document.querySelectorAll('.server-tag');
+  const sortButtons = document.querySelectorAll('.sort-btn');
+
+  // 状态变量
+  let currentPage = 1;
+  let currentLimit = 50;
+  let currentSearch = '';
+  let currentServer = '';
+  let currentSort = 'default';
+  let totalPages = 1;
+  let totalRecords = 0;
   let allData = [];
 
-  // 📥 从 data.json 加载数据
-  fetch('data.json')
-    .then(response => {
-      if (!response.ok) throw new Error('无法加载 data.json');
-      return response.json();
-    })
-    .then(data => {
-      allData = data;
-      renderTable(data);
+  // 防抖函数，减少搜索请求频率
+  let searchTimeout = null;
+  const DEBOUNCE_DELAY = 300;
+
+  // 初始化页面
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchAccounts();
+    
+    // 绑定事件监听器
+    searchInput.addEventListener('input', handleSearch);
+    pageSizeSelect.addEventListener('change', handlePageSizeChange);
+    firstPageBtn.addEventListener('click', () => changePage(1));
+    prevPageBtn.addEventListener('click', () => changePage(currentPage - 1));
+    nextPageBtn.addEventListener('click', () => changePage(currentPage + 1));
+    lastPageBtn.addEventListener('click', () => changePage(totalPages));
+    goPageBtn.addEventListener('click', handleGoToPage);
+    pageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleGoToPage();
+    });
+    
+    // 绑定服务器标签事件
+    serverTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        const server = tag.dataset.server;
+        setActiveServer(server);
+        currentPage = 1;
+        fetchAccounts();
+      });
+    });
+    
+    // 绑定排序按钮事件
+    sortButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sort = btn.dataset.sort;
+        setActiveSort(sort);
+        currentPage = 1;
+        fetchAccounts();
+      });
+    });
+  });
+
+  // 设置活动服务器标签
+  function setActiveServer(server) {
+    serverTags.forEach(tag => {
+      if (tag.dataset.server === server) {
+        tag.classList.add('active');
+      } else {
+        tag.classList.remove('active');
+      }
+    });
+    currentServer = server;
+  }
+
+  // 设置活动排序按钮
+  function setActiveSort(sort) {
+    sortButtons.forEach(btn => {
+      btn.classList.remove('active', 'asc', 'desc');
+      if (btn.dataset.sort === sort) {
+        btn.classList.add('active');
+        if (sort === 'price_asc') btn.classList.add('asc');
+        if (sort === 'price_desc') btn.classList.add('desc');
+      }
+    });
+    currentSort = sort;
+  }
+
+  // 处理搜索
+  function handleSearch() {
+    currentSearch = searchInput.value.trim();
+    currentPage = 1;
+    
+    // 防抖处理
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      fetchAccounts();
+    }, DEBOUNCE_DELAY);
+  }
+
+  // 处理每页数量变化
+  function handlePageSizeChange() {
+    currentLimit = parseInt(pageSizeSelect.value);
+    currentPage = 1;
+    fetchAccounts();
+  }
+
+  // 处理跳转到指定页面
+  function handleGoToPage() {
+    const pageNum = parseInt(pageInput.value);
+    if (pageNum && pageNum >= 1 && pageNum <= totalPages) {
+      changePage(pageNum);
+    } else {
+      pageInput.value = currentPage;
+    }
+  }
+
+  // 改变页面
+  function changePage(page) {
+    if (page < 1 || page > totalPages || page === currentPage) return;
+    currentPage = page;
+    pageInput.value = page;
+    fetchAccounts();
+  }
+
+  // 获取账号数据
+  async function fetchAccounts() {
+    try {
+      loading.style.display = 'block';
+      table.style.display = 'none';
+      noResults.style.display = 'none';
+      paginationContainer.style.display = 'none';
+
+      // 构建请求URL
+      let url = `http://116.62.131.121:8092/accounts?page=${currentPage}&limit=${currentLimit}`;
+      
+      // 添加搜索参数
+      if (currentSearch) {
+        url += `&search=${encodeURIComponent(currentSearch)}`;
+      }
+      
+      // 添加服务器筛选参数
+      if (currentServer) {
+        url += `&server=${encodeURIComponent(currentServer)}`;
+      }
+      
+      // 添加排序参数
+      if (currentSort !== 'default') {
+        url += `&sort=${currentSort}`;
+      }
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      
+      const result = await response.json();
+      
+      // 保存所有数据用于前端高亮
+      if (currentPage === 1) {
+        allData = result.data;
+      }
+      
+      // 更新分页信息
+      updatePaginationInfo(result.pagination);
+      
+      // 渲染表格
+      renderTable(result.data);
+      
       loading.style.display = 'none';
       table.style.display = 'table';
-    })
-    .catch(err => {
-      loading.innerHTML = `<span style="color:#d32f2f">❌ 加载失败:  $ {err.message}</span>`;
+      paginationContainer.style.display = 'flex';
+      
+      if (result.data.length === 0) {
+        noResults.style.display = 'block';
+        noResults.textContent = currentSearch || currentServer ? '未找到匹配的账号' : '暂无账号数据';
+      }
+      
+    } catch (err) {
+      loading.innerHTML = `<span style="color:#d32f2f">❌ 加载失败: ${err.message}</span>`;
       console.error('加载错误:', err);
-    });
+    }
+  }
 
+  // 更新分页信息
+  function updatePaginationInfo(pagination) {
+    totalPages = pagination.total_pages;
+    totalRecords = pagination.total_records;
+    currentPage = pagination.current_page;
+    
+    totalPagesSpan.textContent = totalPages;
+    totalRecordsSpan.textContent = totalRecords;
+    
+    const start = (currentPage - 1) * currentLimit + 1;
+    const end = Math.min(currentPage * currentLimit, totalRecords);
+    startRecordSpan.textContent = start;
+    endRecordSpan.textContent = end;
+    
+    pageInput.value = currentPage;
+    pageInput.max = totalPages;
+    
+    firstPageBtn.disabled = currentPage === 1;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+    lastPageBtn.disabled = currentPage === totalPages;
+  }
+
+  // 渲染表格并添加高亮
   function renderTable(data) {
     tableBody.innerHTML = '';
     data.forEach(item => {
       const row = document.createElement('tr');
-      // ✅ 已彻底修复：所有  $ {} 紧贴，无空格！
+      
+      // 对搜索关键词进行高亮处理
+      const highlightText = currentSearch.toLowerCase();
+      
       row.innerHTML = `
-        <td data-label="服务器（中）">${escapeHtml(item.server_cn)}</td>
-        <td data-label="服务器（英）"> ${escapeHtml(item.server_en)}</td>
-        <td data-label="性别"> ${escapeHtml(item.gender_cn)}</td>
-        <td data-label="等级"> ${item.level}</td>
-        <td data-label="原石"> ${item.primogems}</td>
-        <td data-label="纠缠之缘"> ${item.intertwined_fate}</td>
-        <td data-label="角色（中文）" class="wrap"> ${escapeHtml(item.characters_cn)}</td>
-        <td data-label="角色（英文）" class="wrap"> ${escapeHtml(item.characters_en)}</td>
-        <td data-label="五星角色数量"> ${item.five_star_count}</td>
-        <td data-label="价格（¥）" class="price"> ${item.price}</td>
-        <td data-label="账号类型"> ${escapeHtml(item.account_type)}</td>
+        <td>${highlightText ? highlightTextInCell(item.server_cn, highlightText) : escapeHtml(item.server_cn)}</td>
+        <td>${highlightText ? highlightTextInCell(item.server_en, highlightText) : escapeHtml(item.server_en)}</td>
+        <td>${highlightText ? highlightTextInCell(item.gender_cn, highlightText) : escapeHtml(item.gender_cn)}</td>
+        <td>${item.level}</td>
+        <td>${item.primogems}</td>
+        <td>${item.intertwined_fate}</td>
+        <td class="wrap">${highlightText ? highlightTextInCell(item.characters_cn, highlightText) : escapeHtml(item.characters_cn)}</td>
+        <td class="wrap">${highlightText ? highlightTextInCell(item.characters_en, highlightText) : escapeHtml(item.characters_en)}</td>
+        <td>${item.five_star_count}</td>
+        <td class="price">${item.price}</td>
+        <td>${highlightText ? highlightTextInCell(item.account_type, highlightText) : escapeHtml(item.account_type)}</td>
       `;
       tableBody.appendChild(row);
     });
   }
 
-  // 🔍 实时搜索
-  searchInput.addEventListener('input', function () {
-    const filter = this.value.trim().toLowerCase();
-    if (!filter) {
-      renderTable(allData);
-      noResults.style.display = 'none';
-      return;
-    }
+  // 文本高亮函数
+  function highlightTextInCell(text, searchText) {
+    if (!text || !searchText) return escapeHtml(text);
+    
+    const escapedText = escapeHtml(text);
+    const regex = new RegExp(`(${escapeRegExp(searchText)})`, 'gi');
+    
+    return escapedText.replace(regex, '<mark class="highlight">$1</mark>');
+  }
 
-    const filtered = allData.filter(item =>
-      Object.values(item).some(val =>
-        String(val).toLowerCase().includes(filter)
-      )
-    );
+  // 转义正则表达式特殊字符
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 
-    renderTable(filtered);
-    noResults.style.display = filtered.length === 0 ? 'block' : 'none';
-  });
-
-  // 防 XSS
+  // HTML转义函数
   function escapeHtml(text) {
     if (typeof text !== 'string') return text;
     return text
